@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Página Interativa</title>
   <style>
     body {
@@ -33,20 +33,13 @@
       opacity: 0.8;
     }
     @keyframes cair {
-      0% {
-        transform: translateY(-100px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 1;
-      }
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(100vh); opacity: 1; }
     }
     .ip-box {
       position: fixed;
       top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 10px;
       background: rgba(0, 0, 0, 0.7);
       padding: 10px 20px;
       border-radius: 10px;
@@ -197,7 +190,6 @@
 </head>
 <body>
   <div class="neve"></div>
-
   <div class="ip-box" id="ip" style="display: none;">Carregando IP...</div>
 
   <div class="menu" onclick="toggleMenu()">
@@ -227,7 +219,7 @@
         <div onclick="window.open('https://consultanumero.abrtelecom.com.br/consultanumero/consulta/consultaSituacaoAtualCtg')">Número</div>
         <div onclick="window.open('https://servicos.receita.fazenda.gov.br/Servicos/CPF/ConsultaSituacao/ConsultaPublica.asp')">CPF</div>
         <div onclick="window.open('https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp')">CNPJ</div>
-        <div onclick="window.open('https://riczin2008.github.io/IP/')">IP</div>        
+        <div onclick="window.open('https://riczin2008.github.io/IP/')">IP</div>
       </div>
     </div>
     <div class="categoria" onclick="toggleCategoria(this)">PIX fake
@@ -248,13 +240,12 @@
 
   <div class="center">
     <div class="foto" onclick="mostrarConteudo()">
-      <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central">
+      <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central" />
     </div>
     <div class="links-sociais">
       <a href="https://www.instagram.com/ric_zin_7?igsh=MTBwazVsYnAyNDAxZQ==" target="_blank">Instagram</a>
       <a href="https://www.youtube.com/@TD7-OFF" target="_blank">YouTube</a>
     </div>
-
     <div class="conteudo">
       <div class="botoes">
         <button onclick="window.open('https://riczin2008.github.io/Doacao/')">Fazer doação</button>
@@ -282,6 +273,7 @@
       document.querySelector('.conteudo').style.display = 'flex';
       document.querySelector('.menu').style.display = 'flex';
       document.querySelector('.ip-box').style.display = 'block';
+      document.querySelector('.links-sociais').style.display = 'none';
       mostrarIP();
     }
 
@@ -318,7 +310,20 @@
       window.open('https://link-da-musica.com');
     }
 
-    window.onload = criarNeve;
+    function destacarBotaoClicado() {
+      const botoes = document.querySelectorAll('button, .nomes div, .opcao');
+      botoes.forEach(botao => {
+        botao.addEventListener('click', function () {
+          this.style.background = 'red';
+        });
+      });
+    }
+
+    window.onload = () => {
+      criarNeve();
+      destacarBotaoClicado();
+    };
   </script>
 </body>
-</html>
+  </html>
+    
