@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Interativa</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url('https://github.com/RICZIN2008/Midia/raw/main/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow: hidden;
+    }
+    .neve {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .neve span {
+      position: absolute;
+      display: block;
+      width: 5px;
+      height: 5px;
+      background: #c57eff;
+      border-radius: 50%;
+      animation: cair linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes cair {
+      0% {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+    }
+    .ip-box {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 10px;
+      z-index: 101;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    .foto {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .links-sociais {
+      margin-top: 10px;
+      font-size: 12px;
+      display: flex;
+      gap: 20px;
+    }
+    .links-sociais a {
+      color: white;
+      text-decoration: none;
+    }
+    .conteudo {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .menu {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .barra {
+      width: 40px;
+      height: 5px;
+      background: white;
+    }
+    .menu-categorias {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .menu-categorias .categoria {
+      cursor: pointer;
+      background: rgba(0,0,0,0.6);
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+    .nomes {
+      display: none;
+      margin-top: 5px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .categoria.ativa .nomes {
+      display: flex;
+    }
+    .botoes {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 10px;
+      z-index: 10;
+    }
+    .botoes button, .nomes div {
+      padding: 10px 15px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+    .botao-fundo-container {
+      position: fixed;
+      top: 80px;
+      left: 10px;
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .botao-fundo, .botao-musica {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 24px;
+    }
+    .botao-musica.hidden {
+      display: none;
+    }
+    .seletor-fundo {
+      position: fixed;
+      top: 140px;
+      left: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+      color: white;
+      gap: 5px;
+      z-index: 1000;
+    }
+    .seletor-fundo h3 {
+      margin: 0 0 5px;
+    }
+    .seletor-fundo .opcao {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="neve"></div>
+
+  <div class="ip-box" id="ip" style="display: none;">Carregando IP...</div>
+
+  <div class="menu" onclick="toggleMenu()">
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+  </div>
+
+  <div class="botao-fundo-container">
+    <div class="botao-fundo" onclick="toggleSeletorFundo()">📷</div>
+    <div class="botao-musica" id="botaoMusica" onclick="abrirMusica()">🎵</div>
+  </div>
+
+  <div class="seletor-fundo">
+    <h3>Fundo</h3>
+    <div><strong>GIF</strong></div>
+    <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/giphy.gif')">Gif 1</div>
+    <div class="opcao" onclick="trocarFundo('https://example.com/gif2.gif')">Gif 2</div>
+    <div><strong>Foto</strong></div>
+    <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/images_1962af409d2.jpeg')">Foto 1</div>
+    <div class="opcao" onclick="trocarFundo('https://example.com/foto2.jpg')">Foto 2</div>
+  </div>
+
+  <div class="menu-categorias">
+    <div class="categoria" onclick="toggleCategoria(this)">Consultar dados
+      <div class="nomes">
+        <div onclick="window.open('https://link1.com')">Número</div>
+        <div onclick="window.open('https://link2.com')">CPF</div>
+        <div onclick="window.open('https://link3.com')">CNPJ</div>
+        <div onclick="window.open('https://riczin2008.github.io/IP/')">IP</div>        
+      </div>
+    </div>
+    <div class="categoria" onclick="toggleCategoria(this)">PIX fake
+      <div class="nomes">
+        <div onclick="window.open('https://link4.com')">Inter</div>
+        <div onclick="window.open('https://link5.com')">Nome 5</div>
+        <div onclick="window.open('https://link6.com')">Nome 6</div>
+      </div>
+    </div>
+    <div class="categoria" onclick="toggleCategoria(this)">Notas falsas
+      <div class="nomes">
+        <div onclick="window.open('https://link7.com')">Nome 7</div>
+        <div onclick="window.open('https://link8.com')">Nome 8</div>
+        <div onclick="window.open('https://link9.com')">Nome 9</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="center">
+    <div class="foto" onclick="mostrarConteudo()">
+      <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central">
+    </div>
+    <div class="links-sociais">
+      <a href="https://www.instagram.com/ric_zin_7?igsh=MTBwazVsYnAyNDAxZQ==" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@TD7-OFF" target="_blank">YouTube</a>
+    </div>
+
+    <div class="conteudo">
+      <div class="botoes">
+        <button onclick="window.open('https://riczin2008.github.io/Doacao/')">Fazer doação</button>
+        <button onclick="window.open('https://chat.whatsapp.com/HZnkHg6EmbtIFaXlYXaOBn')">Grupo</button>
+        <button onclick="window.open('https://link3.com')">Contato</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function mostrarIP() {
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('ip').innerText = `IP: ${data.ip}`;
+        });
+    }
+
+    function toggleCategoria(element) {
+      element.classList.toggle('ativa');
+    }
+
+    function mostrarConteudo() {
+      document.querySelector('.foto').style.display = 'none';
+      document.querySelector('.conteudo').style.display = 'flex';
+      document.querySelector('.menu').style.display = 'flex';
+      document.querySelector('.ip-box').style.display = 'block';
+      mostrarIP();
+    }
+
+    function toggleMenu() {
+      const menu = document.querySelector('.menu-categorias');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function criarNeve() {
+      const neveContainer = document.querySelector('.neve');
+      for (let i = 0; i < 100; i++) {
+        const floco = document.createElement('span');
+        floco.style.left = Math.random() * 100 + '%';
+        floco.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        floco.style.animationDelay = (Math.random() * 5) + 's';
+        neveContainer.appendChild(floco);
+      }
+    }
+
+    function toggleSeletorFundo() {
+      const seletor = document.querySelector('.seletor-fundo');
+      const botaoMusica = document.getElementById('botaoMusica');
+      const visivel = seletor.style.display === 'flex';
+      seletor.style.display = visivel ? 'none' : 'flex';
+      botaoMusica.style.display = visivel ? 'flex' : 'none';
+    }
+
+    function trocarFundo(url) {
+      document.body.style.background = `url('${url}') no-repeat center center fixed`;
+      document.body.style.backgroundSize = 'cover';
+    }
+
+    function abrirMusica() {
+      window.open('https://link-da-musica.com');
+    }
+
+    window.onload = criarNeve;
+  </script>
+</body>
+</html>
