@@ -102,7 +102,6 @@
     }
 
     .menu {
-      display: none;
       position: absolute;
       top: 10px;
       right: 10px;
@@ -116,50 +115,6 @@
       width: 40px;
       height: 5px;
       background: white;
-    }
-
-    .menu-categorias {
-      display: none;
-      position: fixed;
-      top: 80px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 20px;
-      border-radius: 10px;
-      z-index: 1000;
-      width: 250px;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-categorias .titulo {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: white;
-    }
-
-    .botoes-consulta {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .botoes-consulta button {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .botoes-consulta button:hover,
-    .botoes-consulta button:active {
-      background: #ff0000;
     }
 
     .botoes {
@@ -235,6 +190,11 @@
       padding: 5px 10px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .seletor-fundo .opcao:hover {
+      background: #ff0000;
     }
   </style>
 </head>
@@ -242,7 +202,7 @@
   <div class="neve"></div>
   <div class="ip-box" id="ip" style="display: none;">Carregando IP...</div>
 
-  <div class="menu" onclick="toggleMenu()">
+  <div class="menu" onclick="toggleJanelaConsulta()">
     <div class="barra"></div>
     <div class="barra"></div>
     <div class="barra"></div>
@@ -253,7 +213,8 @@
     <div class="botao-musica" id="botaoMusica" onclick="abrirMusica()">🎵</div>
   </div>
 
-  <div class="seletor-fundo">
+  <!-- Seletor de Fundo (mantido) -->
+  <div class="seletor-fundo" id="seletorFundo">
     <h3>Fundo</h3>
     <div><strong>GIF</strong></div>
     <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/giphy.gif')">Gif 1</div>
@@ -263,21 +224,13 @@
     <div class="opcao" onclick="trocarFundo('https://example.com/foto2.jpg')">Foto 2</div>
   </div>
 
-  <!-- NOVA JANELA DE CONSULTA -->
-  <div class="menu-categorias" id="menuCategorias">
-    <div class="titulo">Consultar dados</div>
-    <div class="botoes-consulta">
-      <button onclick="consultar('Número')">Número</button>
-      <button onclick="consultar('CPF')">CPF</button>
-      <button onclick="consultar('CNPJ')">CNPJ</button>
-      <button onclick="consultar('IP')">IP</button>
-      <button onclick="consultar('Opção 5')">Opção 5</button>
-      <button onclick="consultar('Opção 6')">Opção 6</button>
-      <button onclick="consultar('Opção 7')">Opção 7</button>
-      <button onclick="consultar('Opção 8')">Opção 8</button>
-      <button onclick="consultar('Opção 9')">Opção 9</button>
-      <button onclick="consultar('Opção 10')">Opção 10</button>
-    </div>
+  <!-- Nova janela (cópia do seletor de fundo) -->
+  <div class="seletor-fundo" id="janelaConsulta" style="top: 220px;">
+    <h3>Consultar dados</h3>
+    <div class="opcao" onclick="abrirLink('https://example.com/numero')">Número</div>
+    <div class="opcao" onclick="abrirLink('https://example.com/cpf')">CPF</div>
+    <div class="opcao" onclick="abrirLink('https://example.com/cnpj')">CNPJ</div>
+    <div class="opcao" onclick="abrirLink('https://example.com/ip')">IP</div>
   </div>
 
   <div class="center">
@@ -298,17 +251,14 @@
   </div>
 
   <script>
-    function abrirPainel() {
-      document.querySelector('.foto').style.display = 'none';
-      document.querySelector('.conteudo').style.display = 'flex';
-      document.querySelector('.menu').style.display = 'flex';
-      document.querySelector('.ip-box').style.display = 'block';
-      document.querySelector('.links-sociais').style.display = 'none';
+    function toggleSeletorFundo() {
+      const seletor = document.getElementById('seletorFundo');
+      seletor.style.display = seletor.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    function toggleSeletorFundo() {
-      const seletor = document.querySelector('.seletor-fundo');
-      seletor.style.display = seletor.style.display === 'flex' ? 'none' : 'flex';
+    function toggleJanelaConsulta() {
+      const janela = document.getElementById('janelaConsulta');
+      janela.style.display = janela.style.display === 'flex' ? 'none' : 'flex';
     }
 
     function trocarFundo(url) {
@@ -320,8 +270,20 @@
       };
     }
 
+    function abrirLink(url) {
+      window.open(url, '_blank');
+    }
+
     function abrirMusica() {
       window.open('https://link-da-musica.com');
+    }
+
+    function abrirPainel() {
+      document.querySelector('.foto').style.display = 'none';
+      document.querySelector('.conteudo').style.display = 'flex';
+      document.querySelector('.menu').style.display = 'flex';
+      document.querySelector('.ip-box').style.display = 'block';
+      document.querySelector('.links-sociais').style.display = 'none';
     }
 
     function criarNeve() {
@@ -351,5 +313,5 @@
     };
   </script>
 </body>
-    </html>
-  
+  </html>
+      
