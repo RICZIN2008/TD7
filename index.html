@@ -108,17 +108,19 @@
       background: white;
     }
     .menu-copia {
-      display: none;
-      position: fixed;
-      top: 60px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 15px;
-      border-radius: 8px;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 1000;
-      width: 200px;
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 15px;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  width: 200px;
+  max-height: 300px; /* NOVO */
+  overflow-y: auto;  /* NOVO */
     }
     .menu-copia h3 {
       margin: 0 0 5px;
@@ -177,19 +179,19 @@
       display: none; /* Ocultando o botão de música */
     }
     .seletor-fundo {
-      position: fixed;
-      top: 140px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px;
-      border-radius: 10px;
-      display: none;
-      flex-direction: column;
-      color: white;
-      gap: 5px;
-      z-index: 1000;
-      max-height: 300px;
-      overflow-y: auto;
+  position: fixed;
+  top: 140px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  color: white;
+  gap: 5px;
+  z-index: 1000;
+  max-height: 400px; /* pode ajustar conforme necessidade */
+  overflow-y: auto;
     }
     .seletor-fundo h3 {
       margin: 0 0 5px;
