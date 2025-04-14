@@ -74,7 +74,7 @@
     .links-sociais a {
       color: white;
       text-decoration: none;
-      background: #FF0000; /* Cor vermelha para Instagram e YouTube */
+      background: #FF0000;
       padding: 5px 10px;
       border-radius: 5px;
       transition: opacity 0.3s ease;
@@ -109,31 +109,52 @@
       position: absolute;
       top: 50px;
       right: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px;
-      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px;
+      border-radius: 8px;
       flex-direction: column;
       gap: 10px;
       z-index: 1000;
-      max-height: 300px;
+      max-height: 400px;
       overflow-y: auto;
+      width: 200px;
     }
-    .menu-categorias .categoria {
+    .categoria {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 5px 10px;
-      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .categoria:hover {
+      background: #ff0000;
+    }
+    .categoria:active {
+      background: #ff0000;
     }
     .nomes {
       display: none;
-      margin-top: 5px;
+      margin-top: 10px;
       flex-direction: column;
       gap: 5px;
-      max-height: 200px;
-      overflow-y: auto;
+      padding-left: 10px;
     }
     .categoria.ativa .nomes {
       display: flex;
+    }
+    .nomes .opcao {
+      padding: 8px 10px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    .nomes .opcao:hover {
+      background: #ff0000;
+    }
+    .nomes .opcao:active {
+      background: #ff0000;
     }
     .botoes {
       position: fixed;
@@ -146,7 +167,7 @@
       padding: 10px;
       z-index: 10;
     }
-    .botoes button, .nomes div, .opcao {
+    .botoes button {
       padding: 10px 15px;
       cursor: pointer;
       background: rgba(255, 255, 255, 0.2);
@@ -232,22 +253,22 @@
   <div class="menu-categorias">
     <div class="categoria" onclick="toggleCategoria(this)">Consultar dados
       <div class="nomes">
-        <div class="opcao" onclick="window.open('https://example.com/numero')">Número</div>
-        <div class="opcao" onclick="window.open('https://example.com/cpf')">CPF</div>
-        <div class="opcao" onclick="window.open('https://example.com/cnpj')">CNPJ</div>
-        <div class="opcao" onclick="window.open('https://example.com/ip')">IP</div>
-        <div class="opcao" onclick="window.open('https://example.com/opcao5')">Opção 5</div>
-        <div class="opcao" onclick="window.open('https://example.com/opcao6')">Opção 6</div>
-        <div class="opcao" onclick="window.open('https://example.com/opcao7')">Opção 7</div>
-        <div class="opcao" onclick="window.open('https://example.com/opcao8')">Opção 8</div>
-        <div class="opcao" onclick="window.open('https://example.com/opcao9')">Opção 9</div>
-        <div class="opcao" onclick="window.open('https://example.com/opcao10')">Opção 10</div>
+        <div class="opcao" onclick="consultar('Número')">Número</div>
+        <div class="opcao" onclick="consultar('CPF')">CPF</div>
+        <div class="opcao" onclick="consultar('CNPJ')">CNPJ</div>
+        <div class="opcao" onclick="consultar('IP')">IP</div>
+        <div class="opcao" onclick="consultar('Opção 5')">Opção 5</div>
+        <div class="opcao" onclick="consultar('Opção 6')">Opção 6</div>
+        <div class="opcao" onclick="consultar('Opção 7')">Opção 7</div>
+        <div class="opcao" onclick="consultar('Opção 8')">Opção 8</div>
+        <div class="opcao" onclick="consultar('Opção 9')">Opção 9</div>
+        <div class="opcao" onclick="consultar('Opção 10')">Opção 10</div>
       </div>
     </div>
   </div>
 
   <div class="center">
-    <div class="foto" onclick="mostrarConteudo()">
+    <div class="foto" onclick="abrirPainel()">
       <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central" loading="lazy" />
     </div>
     <div class="links-sociais">
@@ -264,22 +285,35 @@
   </div>
 
   <script>
-    function clicarBotao(element) {
-      const allButtons = document.querySelectorAll('.nomes .opcao');
-      allButtons.forEach(button => {
-        button.style.background = 'rgba(255, 255, 255, 0.2)';
-      });
-      element.style.background = 'pink';
-      setTimeout(() => {
-        element.style.background = 'rgba(255, 255, 255, 0.2)';
-      }, 500);
-    }
-
     function toggleCategoria(element) {
-      element.classList.toggle('ativa');
+      const isActive = element.classList.contains('ativa');
+      document.querySelectorAll('.categoria').forEach(cat => {
+        cat.classList.remove('ativa');
+      });
+      if (!isActive) {
+        element.classList.add('ativa');
+      }
     }
 
-    function mostrarConteudo() {
+    function consultar(tipo) {
+      const urls = {
+        'Número': 'https://example.com/numero',
+        'CPF': 'https://example.com/cpf',
+        'CNPJ': 'https://example.com/cnpj',
+        'IP': 'https://example.com/ip',
+        'Opção 5': 'https://example.com/opcao5',
+        'Opção 6': 'https://example.com/opcao6',
+        'Opção 7': 'https://example.com/opcao7',
+        'Opção 8': 'https://example.com/opcao8',
+        'Opção 9': 'https://example.com/opcao9',
+        'Opção 10': 'https://example.com/opcao10'
+      };
+      if (urls[tipo]) {
+        window.open(urls[tipo]);
+      }
+    }
+
+    function abrirPainel() {
       document.querySelector('.foto').style.display = 'none';
       document.querySelector('.conteudo').style.display = 'flex';
       document.querySelector('.menu').style.display = 'flex';
@@ -290,6 +324,9 @@
     function toggleMenu() {
       const menu = document.querySelector('.menu-categorias');
       menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+      if (menu.style.display === 'flex') {
+        document.querySelector('.categoria').classList.add('ativa');
+      }
     }
 
     function toggleSeletorFundo() {
