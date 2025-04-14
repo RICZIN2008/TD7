@@ -108,8 +108,8 @@
       flex-direction: column;
       gap: 10px;
       z-index: 1000;
-      max-height: 300px; /* Limitar a altura */
-      overflow-y: auto; /* Habilitar rolagem vertical */
+      max-height: 300px;
+      overflow-y: auto;
     }
     .menu-categorias .categoria {
       cursor: pointer;
@@ -122,8 +122,8 @@
       margin-top: 5px;
       flex-direction: column;
       gap: 5px;
-      max-height: 200px; /* Limitar a altura das opções */
-      overflow-y: auto; /* Habilitar rolagem vertical */
+      max-height: 200px;
+      overflow-y: auto;
     }
     .categoria.ativa .nomes {
       display: flex;
@@ -146,9 +146,6 @@
       border: none;
       border-radius: 5px;
       color: white;
-    }
-    .categoria.ativa .opcao {
-      background: rgba(0, 0, 0, 0.6);
     }
     .botao-fundo-container {
       position: fixed;
@@ -185,8 +182,8 @@
       color: white;
       gap: 5px;
       z-index: 1000;
-      max-height: 300px; /* Limitar a altura */
-      overflow-y: auto; /* Habilitar rolagem vertical */
+      max-height: 300px;
+      overflow-y: auto;
     }
     .seletor-fundo h3 {
       margin: 0 0 5px;
@@ -223,18 +220,21 @@
     <div><strong>Foto</strong></div>
     <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/images_1962af409d2.jpeg')">Foto 1</div>
     <div class="opcao" onclick="trocarFundo('https://example.com/foto2.jpg')">Foto 2</div>
-    <div class="opcao" onclick="trocarFundo('https://example.com/foto3.jpg')">Foto 3</div>
-    <div class="opcao" onclick="trocarFundo('https://example.com/foto4.jpg')">Foto 4</div>
   </div>
 
   <div class="menu-categorias">
     <div class="categoria" onclick="toggleCategoria(this)">Consultar dados
       <div class="nomes">
-        <div class="opcao" onclick="window.open('https://www.example.com/numero')">Número</div>
-        <div class="opcao" onclick="window.open('https://www.example.com/cpf')">CPF</div>
-        <div class="opcao" onclick="window.open('https://www.example.com/cnpj')">CNPJ</div>
-        <div class="opcao" onclick="window.open('https://www.example.com/ip')">IP</div>
-        <!-- Adicione mais opções aqui se necessário -->
+        <div class="opcao" onclick="window.open('https://example.com/numero')">Número</div>
+        <div class="opcao" onclick="window.open('https://example.com/cpf')">CPF</div>
+        <div class="opcao" onclick="window.open('https://example.com/cnpj')">CNPJ</div>
+        <div class="opcao" onclick="window.open('https://example.com/ip')">IP</div>
+        <div class="opcao" onclick="window.open('https://example.com/opcao5')">Opção 5</div>
+        <div class="opcao" onclick="window.open('https://example.com/opcao6')">Opção 6</div>
+        <div class="opcao" onclick="window.open('https://example.com/opcao7')">Opção 7</div>
+        <div class="opcao" onclick="window.open('https://example.com/opcao8')">Opção 8</div>
+        <div class="opcao" onclick="window.open('https://example.com/opcao9')">Opção 9</div>
+        <div class="opcao" onclick="window.open('https://example.com/opcao10')">Opção 10</div>
       </div>
     </div>
   </div>
@@ -244,7 +244,7 @@
       <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central" />
     </div>
     <div class="links-sociais">
-      <a href="https://www.instagram.com/ric_zin_7?igsh=MTBwazVsYnAyNDAxZQ==" target="_blank">Instagram</a>
+      <a href="https://www.instagram.com/ric_zin_7" target="_blank">Instagram</a>
       <a href="https://www.youtube.com/@TD7-OFF" target="_blank">YouTube</a>
     </div>
     <div class="conteudo">
@@ -285,6 +285,11 @@
       menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     }
 
+    function toggleSeletorFundo() {
+      const seletor = document.querySelector('.seletor-fundo');
+      seletor.style.display = seletor.style.display === 'flex' ? 'none' : 'flex';
+    }
+
     function trocarFundo(url) {
       document.body.style.background = `url('${url}') no-repeat center center fixed`;
       document.body.style.backgroundSize = 'cover';
@@ -294,8 +299,31 @@
       window.open('https://link-da-musica.com');
     }
 
+    function criarNeve() {
+      const neveContainer = document.querySelector('.neve');
+      for (let i = 0; i < 80; i++) {
+        const floco = document.createElement('span');
+        floco.style.left = `${Math.random() * 100}vw`;
+        floco.style.animationDuration = `${2 + Math.random() * 3}s`;
+        floco.style.animationDelay = `${Math.random() * 5}s`;
+        neveContainer.appendChild(floco);
+      }
+    }
+
+    function buscarIP() {
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('ip').innerText = `Seu IP: ${data.ip}`;
+        })
+        .catch(() => {
+          document.getElementById('ip').innerText = 'Não foi possível obter o IP';
+        });
+    }
+
     window.onload = () => {
       criarNeve();
+      buscarIP();
     };
   </script>
 </body>
