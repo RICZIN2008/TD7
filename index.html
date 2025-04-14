@@ -108,6 +108,8 @@
       flex-direction: column;
       gap: 10px;
       z-index: 1000;
+      max-height: 70vh;
+      overflow-y: auto;
     }
     .menu-categorias .categoria {
       cursor: pointer;
@@ -222,28 +224,6 @@
         <div onclick="window.open('https://riczin2008.github.io/IP/')">IP</div>
       </div>
     </div>
-    <div class="categoria" onclick="toggleCategoria(this)">PIX fake
-      <div class="nomes">
-        <div onclick="window.open('https://link4.com')">Inter</div>
-        <div onclick="window.open('https://link5.com')">Pagbank</div>
-        <div onclick="window.open('https://link6.com')">PicPay</div>
-      </div>
-    </div>
-    <div class="categoria" onclick="toggleCategoria(this)">Notas falsas
-      <div class="nomes">
-        <div onclick="window.open('https://www.mediafire.com/file/gwn83fr0p26kdy5/RicZin+2+reais+antiga.pdf/file')">RicZin 2 reais.pdf</div>
-        <div onclick="window.open('https://www.mediafire.com/file/faz5pqmbwy0m8y3/RicZin+de+10+reais+antiga.pdf/file')">RicZin 10 reais.pdf</div>
-        <div onclick="window.open('https://www.mediafire.com/file/c652huhpallhwdr/RicZin+20+reais+marcada.pdf/file')">RicZin 20 reais.pdf</div>
-      </div>
-    </div>
-    <div class="categoria" onclick="toggleCategoria(this)">Abaixar imagem, GIF & vídeo 
-      <div class="nomes">
-        <div onclick="window.open('https://link4.com')">Instagram</div>
-        <div onclick="window.open('https://link4.com')">Facebook</div>
-        <div onclick="window.open('https://link4.com')">Tik Tok</div>
-        <div onclick="window.open('https://link4.com')">GIF</div>        
-      </div>
-    </div>
   </div>
 
   <div class="center">
@@ -264,18 +244,6 @@
   </div>
 
   <script>
-    const senhaMenu = "1234"; // Senha de acesso
-
-    function acessarBotao(botao, link) {
-      const senha = prompt(`Digite a chave de acesso para acessar o botão: ${botao}`);
-      if (senha === senhaMenu) {
-        alert(`Você acessou o botão: ${botao}`);
-        window.open(link);
-      } else {
-        alert("Chave incorreta!");
-      }
-    }
-    
     function mostrarIP() {
       fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
@@ -334,7 +302,11 @@
       const botoes = document.querySelectorAll('button, .nomes div, .opcao');
       botoes.forEach(botao => {
         botao.addEventListener('click', function () {
+          const originalBg = this.style.background;
           this.style.background = 'red';
+          setTimeout(() => {
+            this.style.background = originalBg || 'rgba(255, 255, 255, 0.2)';
+          }, 1000);
         });
       });
     }
@@ -346,6 +318,4 @@
   </script>
 </body>
   </html>
-    
-    
-    
+  
