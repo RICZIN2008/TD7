@@ -44,6 +44,7 @@
       padding: 10px 20px;
       border-radius: 10px;
       z-index: 101;
+      display: none;
     }
     .center {
       display: flex;
@@ -89,6 +90,69 @@
       gap: 20px;
       margin-top: 40px;
     }
+    .menu, .botao-fundo-container {
+      display: none; /* Inicialmente oculto */
+    }
+    .menu {
+      position: fixed;
+      top: 70px; /* Ajustado para ficar abaixo das 3 barras */
+      right: 10px;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .barra {
+      width: 40px;
+      height: 5px;
+      background: white;
+    }
+    .menu-copia {
+      display: none;
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px;
+      border-radius: 8px;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+      width: 200px;
+    }
+    .menu-copia h3 {
+      margin: 0 0 5px;
+    }
+    .menu-copia .opcao {
+      cursor: pointer;
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .menu-copia .opcao:hover {
+      background: red;
+    }
+
+    .botoes {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 10px;
+      z-index: 10;
+    }
+    .botoes button {
+      padding: 10px 15px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
     .botao-fundo-container {
       position: fixed;
       top: 80px;
@@ -110,7 +174,7 @@
       font-size: 24px;
     }
     .botao-musica.hidden {
-      display: none;
+      display: none; /* Ocultando o botão de música */
     }
     .seletor-fundo {
       position: fixed;
@@ -136,47 +200,18 @@
       padding: 5px 10px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 4px;
-      transition: background 0.3s ease;
     }
-    .seletor-fundo .opcao:hover, .seletor-fundo .opcao:active {
-      background: red; /* Muda para vermelho quando o mouse passa ou o botão é pressionado */
-    }
-
-    /* Estilo para o menu de categorias e opções */
-    .menu-copia {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      flex-direction: column;
-      gap: 10px;
-      cursor: pointer;
-      z-index: 1001;
-      display: none;
-    }
-
-    .menu-copia .barra {
-      width: 40px;
-      height: 5px;
-      background: white;
-    }
-
-    .menu-copia .opcao {
-      cursor: pointer;
-      padding: 5px 10px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
-      transition: background 0.3s ease;
-    }
-
-    .menu-copia .opcao:hover, .menu-copia .opcao:active {
-      background: red; /* Muda para vermelho quando o mouse passa ou o botão é pressionado */
-    }
-
   </style>
 </head>
 <body>
   <div class="neve"></div>
-  <div class="ip-box" id="ip" style="display: none;">Carregando IP...</div>
+  <div class="ip-box" id="ip">Carregando IP...</div>
+
+  <div class="menu" onclick="toggleMenu()">
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+  </div>
 
   <div class="botao-fundo-container">
     <div class="botao-fundo" onclick="toggleSeletorFundo()">📷</div>
@@ -191,6 +226,15 @@
     <div><strong>Foto</strong></div>
     <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/images_1962af409d2.jpeg')">Foto 1</div>
     <div class="opcao" onclick="trocarFundo('https://example.com/foto2.jpg')">Foto 2</div>
+  </div>
+
+  <div class="menu-copia" id="menuCopia">
+    <h3>Consultar Dados</h3>
+    <div class="opcao" onclick="window.open('https://example.com/numero')">Número</div>
+    <div class="opcao" onclick="window.open('https://example.com/cpf')">CPF</div>
+    <div class="opcao" onclick="window.open('https://example.com/cnpj')">CNPJ</div>
+    <div class="opcao" onclick="window.open('https://example.com/ip')">IP</div>
+    <div class="opcao" onclick="window.open('https://example.com/opcao5')">Opção 5</div>
   </div>
 
   <div class="center">
@@ -211,6 +255,11 @@
   </div>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menuCopia');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
     function toggleSeletorFundo() {
       const seletor = document.querySelector('.seletor-fundo');
       seletor.style.display = seletor.style.display === 'flex' ? 'none' : 'flex';
@@ -232,16 +281,11 @@
     function abrirPainel() {
       document.querySelector('.foto').style.display = 'none';
       document.querySelector('.conteudo').style.display = 'flex';
+      document.querySelector('.menu').style.display = 'flex';
       document.querySelector('.botao-fundo-container').style.display = 'flex';
-      document.querySelector('.menu-copia').style.display = 'flex';
       document.querySelector('.ip-box').style.display = 'block';
       document.querySelector('.links-sociais').style.display = 'none';
     }
-
-    window.onload = () => {
-      criarNeve();
-      buscarIP();
-    };
 
     function criarNeve() {
       const neveContainer = document.querySelector('.neve');
@@ -263,6 +307,11 @@
         document.getElementById('ip').innerText = 'Não foi possível obter o IP';
       }
     }
+
+    window.onload = () => {
+      criarNeve();
+      buscarIP();
+    };
   </script>
 </body>
   </html>
