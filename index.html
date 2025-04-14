@@ -91,12 +91,12 @@
       margin-top: 40px;
     }
     .menu, .botao-fundo-container {
-      display: none; /* Inicialmente oculto */
+      display: none;
     }
     .menu {
       position: fixed;
-      top: 10px; /* Ajustado para ficar acima da tela */
-      left: 10px; /* Lado esquerdo */
+      top: 70px;
+      left: 10px;
       flex-direction: column;
       gap: 10px;
       cursor: pointer;
@@ -111,7 +111,7 @@
       display: none;
       position: fixed;
       top: 60px;
-      right: 10px;
+      left: 10px;
       background: rgba(0, 0, 0, 0.9);
       padding: 15px;
       border-radius: 8px;
@@ -133,7 +133,6 @@
     .menu-copia .opcao:hover {
       background: red;
     }
-
     .botoes {
       position: fixed;
       bottom: 0;
@@ -174,7 +173,7 @@
       font-size: 24px;
     }
     .botao-musica.hidden {
-      display: none; /* Ocultando o botão de música */
+      display: none;
     }
     .seletor-fundo {
       position: fixed;
@@ -200,7 +199,6 @@
       padding: 5px 10px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 4px;
-      transition: background 0.3s ease;
     }
   </style>
 </head>
@@ -286,7 +284,6 @@
       document.querySelector('.botao-fundo-container').style.display = 'flex';
       document.querySelector('.ip-box').style.display = 'block';
       document.querySelector('.links-sociais').style.display = 'none';
-      document.querySelector('.botao-fundo-container').style.display = 'flex'; // Mostrar os botões
     }
 
     function criarNeve() {
@@ -314,17 +311,7 @@
       criarNeve();
       buscarIP();
     };
-
-    // Função para adicionar a cor vermelha nos botões enquanto pressionados
-    document.querySelectorAll('.opcao').forEach(opcao => {
-      opcao.addEventListener('mousedown', () => {
-        opcao.style.background = 'red';
-      });
-      opcao.addEventListener('mouseup', () => {
-        opcao.style.background = 'rgba(255, 255, 255, 0.2)';
-      });
-    });
   </script>
 </body>
-      </html>
+          </html>
       
