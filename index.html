@@ -13,7 +13,6 @@
       color: white;
       overflow: hidden;
     }
-
     .neve {
       position: fixed;
       top: 0;
@@ -23,7 +22,6 @@
       pointer-events: none;
       z-index: 100;
     }
-
     .neve span {
       position: absolute;
       display: block;
@@ -34,12 +32,10 @@
       animation: cair linear infinite;
       opacity: 0.8;
     }
-
     @keyframes cair {
       0% { transform: translateY(-100px); opacity: 0; }
       100% { transform: translateY(100vh); opacity: 1; }
     }
-
     .ip-box {
       position: fixed;
       top: 10px;
@@ -49,7 +45,6 @@
       border-radius: 10px;
       z-index: 101;
     }
-
     .center {
       display: flex;
       justify-content: center;
@@ -57,7 +52,6 @@
       height: 100vh;
       flex-direction: column;
     }
-
     .foto {
       width: 200px;
       height: 200px;
@@ -66,20 +60,17 @@
       cursor: pointer;
       transition: transform 0.3s ease;
     }
-
     .foto img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .links-sociais {
       margin-top: 10px;
       font-size: 12px;
       display: flex;
       gap: 20px;
     }
-
     .links-sociais a {
       color: white;
       text-decoration: none;
@@ -88,11 +79,9 @@
       border-radius: 5px;
       transition: opacity 0.3s ease;
     }
-
     .links-sociais a:hover {
       opacity: 0.8;
     }
-
     .conteudo {
       display: none;
       flex-direction: column;
@@ -100,44 +89,6 @@
       gap: 20px;
       margin-top: 40px;
     }
-
-    .menu {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      flex-direction: column;
-      gap: 10px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .barra {
-      width: 40px;
-      height: 5px;
-      background: white;
-    }
-
-    .botoes {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      padding: 10px;
-      z-index: 10;
-    }
-
-    .botoes button {
-      padding: 10px 15px;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      border-radius: 5px;
-      color: white;
-    }
-
     .botao-fundo-container {
       position: fixed;
       top: 80px;
@@ -147,7 +98,6 @@
       flex-direction: column;
       gap: 10px;
     }
-
     .botao-fundo, .botao-musica {
       width: 50px;
       height: 50px;
@@ -159,11 +109,9 @@
       cursor: pointer;
       font-size: 24px;
     }
-
     .botao-musica.hidden {
       display: none;
     }
-
     .seletor-fundo {
       position: fixed;
       top: 140px;
@@ -179,11 +127,9 @@
       max-height: 300px;
       overflow-y: auto;
     }
-
     .seletor-fundo h3 {
       margin: 0 0 5px;
     }
-
     .seletor-fundo .opcao {
       margin-left: 10px;
       cursor: pointer;
@@ -192,29 +138,52 @@
       border-radius: 4px;
       transition: background 0.3s ease;
     }
-
-    .seletor-fundo .opcao:hover {
-      background: #ff0000;
+    .seletor-fundo .opcao:hover, .seletor-fundo .opcao:active {
+      background: red; /* Muda para vermelho quando o mouse passa ou o botão é pressionado */
     }
+
+    /* Estilo para o menu de categorias e opções */
+    .menu-copia {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      z-index: 1001;
+      display: none;
+    }
+
+    .menu-copia .barra {
+      width: 40px;
+      height: 5px;
+      background: white;
+    }
+
+    .menu-copia .opcao {
+      cursor: pointer;
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .menu-copia .opcao:hover, .menu-copia .opcao:active {
+      background: red; /* Muda para vermelho quando o mouse passa ou o botão é pressionado */
+    }
+
   </style>
 </head>
 <body>
   <div class="neve"></div>
   <div class="ip-box" id="ip" style="display: none;">Carregando IP...</div>
 
-  <div class="menu" onclick="toggleJanelaConsulta()">
-    <div class="barra"></div>
-    <div class="barra"></div>
-    <div class="barra"></div>
-  </div>
-
   <div class="botao-fundo-container">
     <div class="botao-fundo" onclick="toggleSeletorFundo()">📷</div>
     <div class="botao-musica" id="botaoMusica" onclick="abrirMusica()">🎵</div>
   </div>
 
-  <!-- Seletor de Fundo (mantido) -->
-  <div class="seletor-fundo" id="seletorFundo">
+  <div class="seletor-fundo">
     <h3>Fundo</h3>
     <div><strong>GIF</strong></div>
     <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/giphy.gif')">Gif 1</div>
@@ -222,15 +191,6 @@
     <div><strong>Foto</strong></div>
     <div class="opcao" onclick="trocarFundo('https://github.com/RICZIN2008/Midia/raw/main/images_1962af409d2.jpeg')">Foto 1</div>
     <div class="opcao" onclick="trocarFundo('https://example.com/foto2.jpg')">Foto 2</div>
-  </div>
-
-  <!-- Nova janela (cópia do seletor de fundo) -->
-  <div class="seletor-fundo" id="janelaConsulta" style="top: 220px;">
-    <h3>Consultar dados</h3>
-    <div class="opcao" onclick="abrirLink('https://example.com/numero')">Número</div>
-    <div class="opcao" onclick="abrirLink('https://example.com/cpf')">CPF</div>
-    <div class="opcao" onclick="abrirLink('https://example.com/cnpj')">CNPJ</div>
-    <div class="opcao" onclick="abrirLink('https://example.com/ip')">IP</div>
   </div>
 
   <div class="center">
@@ -252,13 +212,8 @@
 
   <script>
     function toggleSeletorFundo() {
-      const seletor = document.getElementById('seletorFundo');
+      const seletor = document.querySelector('.seletor-fundo');
       seletor.style.display = seletor.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    function toggleJanelaConsulta() {
-      const janela = document.getElementById('janelaConsulta');
-      janela.style.display = janela.style.display === 'flex' ? 'none' : 'flex';
     }
 
     function trocarFundo(url) {
@@ -270,10 +225,6 @@
       };
     }
 
-    function abrirLink(url) {
-      window.open(url, '_blank');
-    }
-
     function abrirMusica() {
       window.open('https://link-da-musica.com');
     }
@@ -281,10 +232,16 @@
     function abrirPainel() {
       document.querySelector('.foto').style.display = 'none';
       document.querySelector('.conteudo').style.display = 'flex';
-      document.querySelector('.menu').style.display = 'flex';
+      document.querySelector('.botao-fundo-container').style.display = 'flex';
+      document.querySelector('.menu-copia').style.display = 'flex';
       document.querySelector('.ip-box').style.display = 'block';
       document.querySelector('.links-sociais').style.display = 'none';
     }
+
+    window.onload = () => {
+      criarNeve();
+      buscarIP();
+    };
 
     function criarNeve() {
       const neveContainer = document.querySelector('.neve');
@@ -306,12 +263,7 @@
         document.getElementById('ip').innerText = 'Não foi possível obter o IP';
       }
     }
-
-    window.onload = () => {
-      criarNeve();
-      buscarIP();
-    };
   </script>
 </body>
   </html>
-      
+  
