@@ -298,29 +298,6 @@
   </div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menuCategorias');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    function consultar(tipo) {
-      const urls = {
-        'Número': 'https://example.com/numero',
-        'CPF': 'https://example.com/cpf',
-        'CNPJ': 'https://example.com/cnpj',
-        'IP': 'https://example.com/ip',
-        'Opção 5': 'https://example.com/opcao5',
-        'Opção 6': 'https://example.com/opcao6',
-        'Opção 7': 'https://example.com/opcao7',
-        'Opção 8': 'https://example.com/opcao8',
-        'Opção 9': 'https://example.com/opcao9',
-        'Opção 10': 'https://example.com/opcao10'
-      };
-      if (urls[tipo]) {
-        window.open(urls[tipo]);
-      }
-    }
-
     function abrirPainel() {
       document.querySelector('.foto').style.display = 'none';
       document.querySelector('.conteudo').style.display = 'flex';
@@ -374,5 +351,5 @@
     };
   </script>
 </body>
-  </html>
-    
+    </html>
+  
