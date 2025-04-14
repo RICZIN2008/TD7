@@ -74,6 +74,13 @@
     .links-sociais a {
       color: white;
       text-decoration: none;
+      background: #FF0000; /* Cor vermelha para Instagram e YouTube */
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: opacity 0.3s ease;
+    }
+    .links-sociais a:hover {
+      opacity: 0.8;
     }
     .conteudo {
       display: none;
@@ -241,7 +248,7 @@
 
   <div class="center">
     <div class="foto" onclick="mostrarConteudo()">
-      <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central" />
+      <img src="https://github.com/RICZIN2008/Midia/raw/main/IMG_20250409_100709_850.jpg" alt="Foto Central" loading="lazy" />
     </div>
     <div class="links-sociais">
       <a href="https://www.instagram.com/ric_zin_7" target="_blank">Instagram</a>
@@ -291,8 +298,12 @@
     }
 
     function trocarFundo(url) {
-      document.body.style.background = `url('${url}') no-repeat center center fixed`;
-      document.body.style.backgroundSize = 'cover';
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        document.body.style.background = `url('${url}') no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+      };
     }
 
     function abrirMusica() {
@@ -310,15 +321,14 @@
       }
     }
 
-    function buscarIP() {
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('ip').innerText = `Seu IP: ${data.ip}`;
-        })
-        .catch(() => {
-          document.getElementById('ip').innerText = 'Não foi possível obter o IP';
-        });
+    async function buscarIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+        const data = await response.json();
+        document.getElementById('ip').innerText = `Seu IP: ${data.ip}`;
+      } catch {
+        document.getElementById('ip').innerText = 'Não foi possível obter o IP';
+      }
     }
 
     window.onload = () => {
@@ -327,5 +337,4 @@
     };
   </script>
 </body>
-      </html>
-  
+  </html>
