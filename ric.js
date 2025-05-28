@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         RicZin Proteção Total🔐🔥 (Anti-Redirect + AdBlock + Anti-Link Ads)
 // @namespace    https://viayoo.com/
-// @version      9.9.9.9.9.9.9.9.13
+// @version      9.9.9.9.9.9.9.9.14
 // @description  Bloqueia conteúdo de sites não confiáveis, impede redirecionamentos, exibe selo nos liberados e remove anúncios e links suspeitos.
 // @author       @RicZin7
 // @run-at       document-start
