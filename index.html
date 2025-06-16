@@ -389,4 +389,40 @@
         const data = await response.json();
         document.getElementById('userIp').textContent = data.ip;
       } catch (error) {
-        console.error("Erro
+        console.error("Erro ao obter IP:", error);
+        document.getElementById('userIp').textContent = "Erro";
+      }
+    }
+
+    // Mostrar ou ocultar os painéis
+    document.getElementById('statsBtn').onclick = () => {
+      document.getElementById('statsPanel').classList.toggle('hidden');
+    };
+
+    document.getElementById('themeBtn').onclick = () => {
+      document.getElementById('themePanel').classList.toggle('hidden');
+    };
+
+    document.getElementById('menuBtn').onclick = () => {
+      document.getElementById('menuPanel').classList.toggle('hidden');
+    };
+
+    document.getElementById('closeStats').onclick = () => {
+      document.getElementById('statsPanel').classList.add('hidden');
+    };
+
+    document.getElementById('closeTheme').onclick = () => {
+      document.getElementById('themePanel').classList.add('hidden');
+    };
+
+    document.getElementById('closeMenu').onclick = () => {
+      document.getElementById('menuPanel').classList.add('hidden');
+    };
+
+    // Iniciar funções ao carregar
+    getUserIP();
+    createSnowflakes();
+  </script>
+</body>
+</html>
+
